@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    container_name: feedback-api
+    ports:
+      - "3102:3000"
+    environment:
+      PORT: 3000
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      ALLOWED_ORIGINS: https://wibholmsolutions.com
+    restart: unless-stopped

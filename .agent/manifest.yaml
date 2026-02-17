@@ -1,0 +1,17 @@
+name: feedback-api
+status: active
+type: service
+description: "Central feedback API - modtager feedback fra alle apps og opretter GitHub issues"
+
+critical_paths:
+  - src/index.ts
+  - docker-compose.yml
+  - Dockerfile
+
+safe_to_delete:
+  - "*.log"
+  - "node_modules/"
+  - "dist/"
+
+dependencies:
+  - caddy
