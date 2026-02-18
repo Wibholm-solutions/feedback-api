@@ -51,7 +51,7 @@ setInterval(() => {
 interface FeedbackBody {
   repo: string;
   title: string;
-  description: string;
+  description?: string;
   type: "bug" | "feature" | "feedback";
   _hp?: string; // honeypot field
 }
@@ -93,8 +93,8 @@ app.post("/api/feedback", async (c) => {
   }
 
   // Validate required fields
-  if (!body.repo || !body.title || !body.description || !body.type) {
-    return c.json({ error: "Missing required fields: repo, title, description, type" }, 400);
+  if (!body.repo || !body.title || !body.type) {
+    return c.json({ error: "Missing required fields: repo, title, type" }, 400);
   }
 
   if (!["bug", "feature", "feedback"].includes(body.type)) {
@@ -108,7 +108,9 @@ app.post("/api/feedback", async (c) => {
 
   // Build GitHub issue
   const labels = [typeToLabel[body.type], "from-app"].filter(Boolean);
-  const issueBody = `${body.description}\n\n---\n*Submitted via feedback widget*`;
+  const issueBody = body.description
+    ? `${body.description}\n\n---\n*Submitted via feedback widget*`
+    : "*Submitted via feedback widget*";
 
   // Create GitHub issue (or fallback to stdout)
   if (!githubToken) {
