@@ -34,6 +34,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # buildx keeps builder state under $DOCKER_CONFIG, and the lane host's
+          # home directory is read-only, so the default location fails with
+          # "read-only file system" before the build starts. Relocating the whole
+          # Docker config is what the publish job already does for its registry
+          # credential; the build needs it for the same reason.
+          export DOCKER_CONFIG="$(mktemp -d /dev/shm/feedback-api-build.XXXXXX)"
+          chmod 0700 "$DOCKER_CONFIG"
+          trap 'rm -rf -- "$DOCKER_CONFIG"' EXIT
           docker buildx build --file Dockerfile --tag "feedback-api:pr-${GITHUB_SHA}" .
 
   publish:
