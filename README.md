@@ -48,8 +48,13 @@ Configuration is by environment variable:
 
 Container: `docker compose up --build` builds the image and reads
 `GITHUB_TOKEN` from the shell environment or a local `.env` file (ignored by
-Git). The workflow in `.github/workflows/ci-cd.yml` deploys `master` through
-the maintainer's own self-hosted runner and is specific to that environment.
+Git). The workflow in `.github/workflows/ci.yml` builds pull requests and
+publishes commit-addressed images from `master` on the trusted development-PC
+CI lane. It does not deploy from this repository; server-specific desired state
+and convergence belong to `saabendtsen/home-server`.
+
+The versioned production-facing container interface is documented in
+[`docs/runtime-contract.md`](docs/runtime-contract.md).
 
 ## Data and privacy
 
