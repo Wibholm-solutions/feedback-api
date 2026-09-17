@@ -1,4 +1,10 @@
-node_modules
-dist
-.env
 .git
+.github
+.env
+dist
+node_modules
+docs
+README.md
+SECURITY.md
+LICENSE
+docker-compose.yml
