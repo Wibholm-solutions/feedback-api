@@ -1,5 +1,6 @@
 .git
 .github
+.env
 dist
 node_modules
 docs
