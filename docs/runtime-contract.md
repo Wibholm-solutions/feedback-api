@@ -17,7 +17,8 @@ belong in the infrastructure repository.
 The health response reports whether the GitHub token is configured without
 returning the token or testing its authority. Deployment verification must
 therefore require both HTTP `200` and the JSON field `github` equal to
-`configured`.
+`configured`. The published image carries the same check as its OCI health
+probe, so container health and deployment readiness use one contract.
 
 ## Configuration
 
