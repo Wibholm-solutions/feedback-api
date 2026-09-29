@@ -64,7 +64,7 @@ const typeToLabel: Record<string, string> = {
 
 // --- Health check ---
 app.get("/api/feedback/health", (c) => {
-  return c.json({ status: "ok", github: githubToken ? "configured" : "missing" });
+  return c.json({ status: "ok", github: githubToken ? "configured" : "missing", service: "feedback-api" });
 });
 
 // --- POST /api/feedback ---
