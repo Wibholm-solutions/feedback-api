@@ -5,16 +5,18 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\"",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "test": "vitest run"
   },
   "dependencies": {
-    "hono": "^4",
-    "@hono/node-server": "^1"
+    "@hono/node-server": "^1",
+    "hono": "^4"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "tsx": "^4",
+    "@types/node": "^22",
     "esbuild": "^0.28",
-    "@types/node": "^22"
+    "tsx": "^4",
+    "typescript": "^5",
+    "vitest": "^3.2.7"
   }
 }
